@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ToDoList.Models
 {
   public class Item
@@ -6,5 +8,7 @@ namespace ToDoList.Models
     public string Description { get; set; }
     public int CategoryId { get; set; }
     public Category Category { get; set; }
+    public List<ItemTag> JoinEntities { get;} //call a new list object Join Entities. Collection navigation property.
+
   }
 }

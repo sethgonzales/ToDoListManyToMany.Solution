@@ -45,10 +45,13 @@ namespace ToDoList.Controllers
     public ActionResult Details(int id)
     {
       Item thisItem = _db.Items
-                          .Include(item => item.Category)
-                          .FirstOrDefault(item => item.ItemId == id);
+          .Include(item => item.Category)
+          .Include(item => item.JoinEntities)
+          .ThenInclude(join => join.Tag)
+          .FirstOrDefault(item => item.ItemId == id);
       return View(thisItem);
     }
+
 
     public ActionResult Edit(int id)
     {
@@ -79,5 +82,7 @@ namespace ToDoList.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    
   }
 }
