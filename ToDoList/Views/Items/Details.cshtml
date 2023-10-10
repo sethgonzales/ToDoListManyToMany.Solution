@@ -7,10 +7,10 @@
 
 <h2>Item Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>  
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
 <h3>@Html.DisplayNameFor(model => model.Category): @Html.DisplayFor(model => model.Category.Name)</h3>
 
-@if(@Model.JoinEntities.Count == 0)
+@if (@Model.JoinEntities.Count == 0)
 {
   <p>This item does not have any tags yet!</p>
 }
@@ -18,9 +18,14 @@ else
 {
   <h4>This item has the following tags:</h4>
   <ul>
-    @foreach(ItemTag join in Model.JoinEntities)
+  @foreach (ItemTag join in Model.JoinEntities)
     {
       <li>Tag: @join.Tag.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Items"))
+      {
+        @Html.Hidden("joinId", @join.ItemTagId)
+        <input type="submit" value="Delete" />
+      }
     }
   </ul>
 }
